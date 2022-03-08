@@ -1,36 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/1107c941bf.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/index.html">
+        <img
+          src="assets/images/logo.png"
+          class="logo"
+          alt="Fisheye Home page"
+        />
+      </a>
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <div class="photograph-header"></div>
+      <div class="filter-container">
+        <label for="filter-listbox">Trier par</label>
+        <ul id="filter-listbox">
+          <div id="arrow-icon">
+            <i class="fas fa-angle-down"></i>
+          </div>
+          <li data-text="popularite" tabindex="0">Popularité</li>
+          <li class="invisible" data-text="date" tabindex="0">Date</li>
+          <li class="invisible" data-text="titre" tabindex="0">Titre</li>
+        </ul>
+      </div>
+      <section class="gallery-section"></section>
+      <div class="lightbox-bg">
+        <div class="lightbox-modal">
+          <img
+            src="assets/icons/close_red.svg" alt="Close lightbox"
+            class="close-lightbox"
+            tabindex="0"
+          />
+          <img src="assets/icons/right-arrow.png" alt="next image" class="arrow arrow-right" tabindex="0">
+          <img src="assets/icons/left-arrow.png" alt="previous image" class="arrow arrow-left" tabindex="0">
+        </div>
       </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+    <div id="contact-modal">
+      <div class="modal">
+        <header>
+          <div>
+            <h2>Contactez-moi</h2>
+          </div>
+          <button id="close-modal">
+            <img src="assets/icons/close.svg" alt="Close Modal"/>
+          </button>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+        <form name="contact" class="contact-form" action="" method="get">
+          <div class="form-data">
+            <label for="prenom">Prénom</label>
+            <input name="prenom" type="text" id="prenom" class="field" />
+          </div>
+          <div class="form-data">
+            <label for="nom">Nom</label>
+            <input name="nom" type="text" id="nom" class="field" />
+          </div>
+          <div class="form-data">
+            <label for="email">Email</label>
+            <input name="email" type="email" id="email" class="field" />
+          </div>
+          <div class="form-data">
+            <label for="message">Votre message</label>
+            <textarea
+              name="message"
+              id="message"
+              rows="5"
+              cols="33"
+              class="field"
+            ></textarea>
+          </div>
+          <button class="submit-button button">Envoyer</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="/scripts/factories/mediaFactory.js"></script>
+    <script src="/scripts/factories/photographerFactory.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/lightBox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
