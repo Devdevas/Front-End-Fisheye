@@ -30,7 +30,7 @@ function getMedia(medias) {
 // Display photographer header
 function displayPhotographerHeader(photographer) {
   const photographerHeader = document.querySelector(".photograph-header");
-  const headerModel = photographerFactory(photographer);
+  const headerModel = new PhotographerFactory(photographer, "photographerData");
   const photographerHeaderDOM = headerModel.getHeaderCardDOM();
   photographerHeader.innerHTML = photographerHeaderDOM;
 }
@@ -40,7 +40,7 @@ function displayMedias(media) {
   const gallerySection = document.querySelector(".gallery-section");
   gallerySection.innerHTML = "";
   media.forEach((element) => {
-    const mediaModel = mediaFactory(element);
+    const mediaModel = new PhotographerFactory(element, "mediaData");
     const mediaCardDOM = mediaModel.getMediaCardDOM();
     gallerySection.appendChild(mediaCardDOM);
   });
@@ -71,12 +71,18 @@ function listBoxFiltersHandler(e, media) {
   const arrowIcon = document.querySelector("#arrow-icon i");
   const filters = document.querySelectorAll("#filter-listbox li");
   const clickedFilter = e.target;
+
   // Show and hide listbox
-  if (clickedFilter) {
+  function showHideListbox() {
     arrowIcon.classList.toggle("fa-angle-up");
     filters[1].classList.toggle("visible");
     filters[2].classList.toggle("visible");
   }
+  arrowIcon.addEventListener("click", showHideListbox);
+  if (clickedFilter) {
+    showHideListbox();
+  }
+
   // Toggle filters on click
   if (clickedFilter === filters[1] || clickedFilter === filters[2]) {
     const clickedFilterText = clickedFilter.textContent;
@@ -117,7 +123,7 @@ function displaySumLikes(photographer, media) {
   media.forEach((el) => {
     sumLikes += el.likes;
   });
-  const sumLikesModel = mediaFactory(photographer);
+  const sumLikesModel = new PhotographerFactory(photographer, "mediaData");
   const sumLikesDOM = sumLikesModel.getAllLikesDOM();
   main.innerHTML += sumLikesDOM;
 }
@@ -128,7 +134,7 @@ function incrementDecrementLikes() {
   const likes = document.getElementsByClassName("likes");
   const sumLikes = document.querySelector(".sum-likes");
   let allLikes = [];
-  
+
   for (let i = 0; i < likes.length; i++) {
     allLikes.push(likes[i].textContent);
     heartIcons[i].addEventListener("click", () => {
@@ -150,13 +156,12 @@ function incrementDecrementLikes() {
       sumLikes.textContent--;
     }
   }
-
 }
 
 //Display photographer's name on the contact-modal header
 function displayModalHeader(photographer) {
   const modalHeader = document.querySelector(".modal header div");
-  const nameModel = photographerFactory(photographer);
+  const nameModel = new PhotographerFactory(photographer, "photographerData");
   const photographNameDOM = nameModel.getPhotographNameDOM();
   modalHeader.innerHTML += photographNameDOM;
 }
@@ -176,7 +181,7 @@ async function init() {
   displayMediasByFilter(media);
   displayLightboxMedias(media);
   displayModalHeader(photographer);
-  displayContactModal()
+  displayContactModal();
 }
 
 init();

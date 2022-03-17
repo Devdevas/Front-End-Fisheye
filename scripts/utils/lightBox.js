@@ -105,7 +105,7 @@ function displayClickedMedia(e, media, lightboxBg, lightboxModal) {
 
     const foundMedia = media.find((element) => element.id == clickedMedia.id);
 
-    const figureModel = mediaFactory(foundMedia);
+    const figureModel = new PhotographerFactory(foundMedia, "mediaData");
     const newMedia = figureModel.getLightboxDOM();
     const currentMedia = document.querySelector(".lightbox-modal figure");
     if (currentMedia) {
@@ -129,7 +129,7 @@ function displayPreviousMedia(media, lightboxModal) {
       i = media.length;
     }
     if (element.id == currentMedia.id && i > 0) {
-      const figureModel = mediaFactory(media[i - 1]);
+      const figureModel = new PhotographerFactory(media[i - 1], "mediaData");
       const newMedia = figureModel.getLightboxDOM();
       lightboxModal.replaceChild(newMedia, currentMedia);
       if (newMedia.firstChild.className == "vid-container") {
@@ -146,7 +146,7 @@ function displayNextMedia(media, lightboxModal) {
       i = -1;
     }
     if (element.id == currentMedia.id && i < media.length - 1) {
-      const figureModel = mediaFactory(media[i + 1]);
+      const figureModel = new PhotographerFactory(media[i + 1], "mediaData");
       const newMedia = figureModel.getLightboxDOM();
       lightboxModal.replaceChild(newMedia, currentMedia);
       if (newMedia.firstChild.className == "vid-container") {

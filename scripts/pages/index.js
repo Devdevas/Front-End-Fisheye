@@ -16,7 +16,7 @@ function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer-section");
 
   const articles = photographers.map((photographer) => {
-    const photographerModel = photographerFactory(photographer);
+    const photographerModel = new PhotographerFactory(photographer, "photographerData");
     const userCardDOM = photographerModel.getUserCardDOM();
     return userCardDOM;
   });

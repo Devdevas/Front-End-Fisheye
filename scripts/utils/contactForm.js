@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 // DOM Elements(inputs)
 const form = document.querySelector(".contact-form");
@@ -20,28 +20,30 @@ function displayContactModal() {
   });
 }
 
-function closeModal(modal, contactBtn) {
+function closeModal(contactModal, contactBtn) {
   closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+    contactModal.style.display = "none";
   });
-  modal.addEventListener("keydown", (e) => {
+  contactModal.addEventListener("keydown", (e) => {
     if (
       e.key === "Escape" ||
       (e.key === "Enter" && document.activeElement === closeBtn)
     ) {
       e.preventDefault();
-      modal.style.display = "none";
+      contactModal.style.display = "none";
       contactBtn.focus();
     }
   });
 }
 
-function trapFocusInModal(modal) {
-  const focusableElements = modal.querySelectorAll("button, textarea, input");
+function trapFocusInModal(contactModal) {
+  const focusableElements = contactModal.querySelectorAll(
+    "button, textarea, input"
+  );
   const firstElement = focusableElements[0];
   const lastElement = focusableElements[focusableElements.length - 1];
 
-  modal.addEventListener("keydown", (e) => {
+  contactModal.addEventListener("keydown", (e) => {
     if (e.key !== "Tab") {
       return;
     }
@@ -129,6 +131,7 @@ function formSubmit() {
       console.log(
         `Prenom: ${prenom.value}, Nom: ${nom.value}, Email:${email.value}, Votre message: ${message.value}`
       );
+      document.getElementById("contact-modal").style.display = "none";
     }
     prenomValidity();
     nomValidity();
